@@ -10,7 +10,7 @@ import { WeatherModule } from './weather/weather.module';
   ],
   imports: [
     BrowserModule,
-    WeatherModule
+    WeatherModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

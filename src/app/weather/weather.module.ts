@@ -3,13 +3,12 @@ import { CommonModule } from '@angular/common';
 import { ForecastComponent } from './forecast/forecast.component';
 
 
-
 @NgModule({
   declarations: [
     ForecastComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
   ],
   exports:
   [

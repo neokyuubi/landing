@@ -1,1 +1,4 @@
-<p>forecast works!</p>
+<div *ngFor="let item of forecastData; let i = index">
+    {{ item.temp | number:'1.0-0' }}°C
+    {{ item.dateString | date:'E' }}
+</div>

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { catchError } from 'rxjs';
-import { WeatherService } from '../weather.service';
+import { openWeatherFinalData, WeatherService } from '../weather.service';
 
 @Component({
   selector: 'app-forecast',
@@ -9,19 +9,17 @@ import { WeatherService } from '../weather.service';
 })
 export class ForecastComponent implements OnInit {
 
+  forecastData! :openWeatherFinalData[];
+
   constructor(private weather:WeatherService) { }
 
   ngOnInit(): void 
   {
-    this.weather.getCurrentLocation()
-    
+    this.weather.getForecaast()
     .subscribe(
-      result => {
-        console.log("coordinates", result);
-      }
-      ,
-      (errors:GeolocationPositionError) => {
-        console.log("errors", errors.message);
+      forecastData => 
+      {
+        this.forecastData = forecastData;
       }
     );
   }

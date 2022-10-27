@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { catchError } from 'rxjs';
+import { catchError, Observable } from 'rxjs';
 import { openWeatherFinalData, WeatherService } from '../weather.service';
 
 @Component({
@@ -9,19 +9,12 @@ import { openWeatherFinalData, WeatherService } from '../weather.service';
 })
 export class ForecastComponent implements OnInit {
 
-  forecastData! :openWeatherFinalData[];
+  forecastData:Observable<{dateString: string, temp: number}[]>;
 
-  constructor(private weather:WeatherService) { }
+  constructor(public weather:WeatherService) {this.forecastData = this.weather.getForecaast()}
 
   ngOnInit(): void 
   {
-    this.weather.getForecaast()
-    .subscribe(
-      forecastData => 
-      {
-        this.forecastData = forecastData;
-      }
-    );
   }
 
 }

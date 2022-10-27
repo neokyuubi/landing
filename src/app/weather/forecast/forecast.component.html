@@ -1,4 +1,6 @@
-<div *ngFor="let item of forecastData; let i = index">
-    {{ item.temp | number:'1.0-0' }}°C
-    {{ item.dateString | date:'E' }}
-</div>
+<ul class="list-group">
+    <li class="weather-item list-group-item" *ngFor="let item of (forecastData | async); let i = index">
+        <p class="temp">{{ item.temp | number:'1.0-0' }}°C</p>
+        <p class="day">{{ item.dateString | date:'E' }}</p>
+    </li>
+</ul>

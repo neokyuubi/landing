@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { scan, Subject } from 'rxjs';
+import { Observable, scan, Subject } from 'rxjs';
 
-interface Command
+export interface Command
 {
   id:number;
   type: 'success'|'error'|'clear';
@@ -13,12 +13,13 @@ interface Command
 })
 export class NotificationsService {
 
-  messages : Subject<Command>;
+  messagesInput : Subject<Command>;
+  messagesOutput : Observable<Command[]>;
 
   constructor() 
   {
-    this.messages = new Subject<Command>();
-    this.messages.pipe(scan((messages:Command[], command:Command)=>
+    this.messagesInput = new Subject<Command>();
+    this.messagesOutput = this.messagesInput.pipe(scan((messages:Command[], command:Command)=>
     {
       if(command.type == "clear")
       {
@@ -33,7 +34,7 @@ export class NotificationsService {
 
   addSuccess(message:string)
   {
-    this.messages.next(<Command>
+    this.messagesInput.next(<Command>
     {
       id:this.randomID(), type:'success', text:message
     });
@@ -41,7 +42,7 @@ export class NotificationsService {
 
   addError(message:string)
   {
-    this.messages.next(<Command>
+    this.messagesInput.next(<Command>
     {
       id:this.randomID(), type:'error', text:message
     });
@@ -49,7 +50,7 @@ export class NotificationsService {
 
   clearMessage(id:number)
   {
-    this.messages.next({id, type:'clear'});
+    this.messagesInput.next({id, type:'clear'});
   }
 
   randomID()

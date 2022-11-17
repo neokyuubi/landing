@@ -11,7 +11,7 @@ export class ForecastComponent implements OnInit {
 
   forecastData:Observable<{dateString: string, temp: number}[]>;
 
-  constructor(public weather:WeatherService) {this.forecastData = this.weather.getForecaast()}
+  constructor( weather:WeatherService) {this.forecastData = weather.getForecaast()}
 
   ngOnInit(): void 
   {

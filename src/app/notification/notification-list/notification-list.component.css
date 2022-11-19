@@ -1,0 +1,17 @@
+:host
+{
+    display: block;
+    position: fixed;
+    bottom: 0;
+    right: 10px;
+    width: 300px;
+}
+
+.close
+{
+    background-color: unset;
+    border: none;
+    font-size: x-large;
+    float: right;
+    transform: translate(30%, -30%);
+}
